@@ -1,3 +1,6 @@
 body {
   padding: .5rem;
 }
+form > * {
+  margin: .3rem;
+}
