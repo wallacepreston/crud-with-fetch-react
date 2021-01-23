@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 
-const Create = () => {
+const Create = ({posts, setPosts}) => {
   const [title, setTitle] = useState([]);
-  const [description, setDescription] = useState([]);
+  const [body, setBody] = useState([]);
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    console.log('title, description: ', title, description);
-    
+    console.log('title, body: ', title, body);
+    const resp = await fetch('https://jsonplace-univclone.herokuapp.com/posts/', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'Application/json'
+      },
+      body: JSON.stringify({
+        title,
+        body,
+      })
+    });
+    const data = await resp.json();
+    setPosts([data, ...posts]);
+    setTitle('');
+    setBody('');
   }
 
   return <>
@@ -17,7 +29,7 @@ const Create = () => {
     </h3>
     <form onSubmit={handleSubmit}>
       <input type="text" placeholder="title" value={title} onChange={(ev) => setTitle(ev.target.value)}></input>
-      <input type="text" placeholder="description" value={description} onChange={(ev) => setDescription(ev.target.value)}></input>
+      <input type="text" placeholder="body" value={body} onChange={(ev) => setBody(ev.target.value)}></input>
       <button type="submit" class="btn btn-outline-primary">Submit</button>
     </form>
   </>
