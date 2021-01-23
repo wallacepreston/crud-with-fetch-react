@@ -40,7 +40,7 @@ const Update = ({posts, setPosts, postId, setPostId}) => {
     <form onSubmit={handleSubmit}>
       <input type="text" placeholder="title" value={title} onChange={(ev) => setTitle(ev.target.value)}></input>
       <input type="text" placeholder="body" value={body} onChange={(ev) => setBody(ev.target.value)}></input>
-      <button type="submit" class="btn btn-outline-primary">Submit</button>
+      <button type="submit" className="btn btn-outline-primary">Submit</button>
     </form>
   </>
 }

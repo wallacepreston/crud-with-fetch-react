@@ -13,6 +13,20 @@ const App = () => {
   const [posts, setPosts] = useState([]);
   const [postId, setPostId] = useState(null);
 
+  const handleDelete = async (postIdToDelete) => {
+    console.log('postIdToDelete: ', postIdToDelete);
+    
+    const resp = await fetch(`https://jsonplace-univclone.herokuapp.com/posts/${postIdToDelete}`, {
+      method: 'DELETE',
+    });
+    const data = await resp.json();
+    console.log('data: ', data); 
+    if(data) {
+      const newPosts = posts.filter(post => post.id !== postIdToDelete);
+      setPosts(newPosts);
+    }
+  }
+
   useEffect(() => {
     const fetchPosts = async () => {
       const resp = await fetch('https://jsonplace-univclone.herokuapp.com/posts/');
@@ -36,7 +50,8 @@ const App = () => {
       posts.map(post => <div key={post.id}>
           <h3>{post.title}</h3>
           <div>{post.body}</div>
-          <button type="button" class="btn btn-outline-primary" onClick={() => setPostId(post.id)}>Edit</button>
+          <button type="button" className="btn btn-outline-primary" onClick={() => setPostId(post.id)}>Edit</button>
+          <button type="button" className="btn btn-outline-danger" onClick={() => handleDelete(post.id)}>Delete</button>
         </div>)
     }
   </>
