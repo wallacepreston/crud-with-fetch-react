@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-// import {
-//   Home,
-// } from './components';
+import {
+  Create,
+} from './components';
 
 import './bootstrap.css';
 import './style.css';
@@ -25,6 +25,7 @@ const App = () => {
     <h1>
       Posts
     </h1>
+    <Create />
     {
       posts.map(post => <div key={post.id}>
           <h3>{post.title}</h3>
