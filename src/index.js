@@ -20,7 +20,6 @@ const App = () => {
       method: 'DELETE',
     });
     const data = await resp.json();
-    console.log('data: ', data); 
     if(data) {
       const newPosts = posts.filter(post => post.id !== postIdToDelete);
       setPosts(newPosts);
